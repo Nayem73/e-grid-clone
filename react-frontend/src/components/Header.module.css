@@ -9,8 +9,30 @@
   align-items: center;
 }
 
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+
+.nav {
+  display: flex;
+  gap: 1rem;
+}
+
 nav a {
-  margin: 0 1rem;
   text-decoration: none;
   color: #333;
+}
+
+.contactButton {
+  background-color: #C5A572;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  color: white;
 }

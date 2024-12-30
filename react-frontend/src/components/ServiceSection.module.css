@@ -1,0 +1,60 @@
+.services {
+  padding: 4rem 2rem;
+  background-color: #f9f9f9;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.heading {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.subheading {
+  font-size: 1.5rem;
+  color: #C5A572;
+  margin-bottom: 1rem;
+}
+
+.underline {
+  width: 50px;
+  height: 4px;
+  background-color: #C5A572;
+  margin: 0 auto 2rem;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text {
+  flex: 1;
+  padding-right: 2rem;
+}
+
+.images {
+  flex: 1;
+  display: flex;
+  gap: 1rem;
+}
+
+.images img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.readMore {
+  background-color: #333;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
