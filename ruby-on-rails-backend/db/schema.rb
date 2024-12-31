@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_29_125040) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_30_150406) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,50 +39,14 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_29_125040) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "component_media", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "page_component_id", null: false
-    t.bigint "media_id", null: false
-    t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["media_id"], name: "index_component_media_on_media_id"
-    t.index ["page_component_id"], name: "index_component_media_on_page_component_id"
-  end
-
-  create_table "media", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "file_name"
-    t.string "file_type"
-    t.string "file_path"
-    t.string "alt_text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "page_components", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "page_id", null: false
-    t.string "component_type"
-    t.integer "position"
-    t.json "content"
-    t.json "style_settings"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["page_id"], name: "index_page_components_on_page_id"
-  end
-
-  create_table "pages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "slug"
-    t.string "template_type"
+  create_table "services", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
-    t.text "meta_description"
-    t.text "meta_keywords"
-    t.string "status"
+    t.text "description"
+    t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "component_media", "media", column: "media_id"
-  add_foreign_key "component_media", "page_components"
-  add_foreign_key "page_components", "pages"
 end
