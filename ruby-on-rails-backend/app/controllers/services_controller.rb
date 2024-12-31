@@ -43,6 +43,6 @@ class Api::ServicesController < ApplicationController
   end
 
   def service_params
-    params.require(:service).permit(:title, :description, :image_url)
+    params.require(:service).permit(:title, :description, :image_url, :slug)
   end
 end
