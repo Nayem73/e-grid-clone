@@ -1,25 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import styles from './ServiceSection.module.css';
 
-const ServiceSection: React.FC = () => (
-  <section className={styles.services}>
-    <div className={styles.container}>
-      <h2 className={styles.heading}>SERVICE</h2>
-      <h3 className={styles.subheading}>service</h3>
-      <div className={styles.underline}></div>
-      <div className={styles.content}>
-        <div className={styles.text}>
-          <h4>Our Services</h4>
-          <p>We offer a range of services to meet your needs.</p>
-          <button className={styles.readMore}>READ MORE</button>
-        </div>
-        <div className={styles.images}>
-          <img src="/path/to/image1.jpg" alt="Service 1" />
-          <img src="/path/to/image2.jpg" alt="Service 2" />
+interface Service {
+  id: number;
+  title: string;
+  description: string;
+  image_url: string;
+  slug: string;
+}
+
+const ServiceSection: React.FC = () => {
+  const [services, setServices] = useState<Service[]>([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/services')
+      .then(response => {
+        setServices(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the services!', error);
+      });
+  }, []);
+
+  console.log(services);
+
+  return (
+    <section className={styles.services}>
+      <div className={styles.container}>
+        <h2 className={styles.heading}>SERVICE</h2>
+        <h3 className={styles.subheading}>service</h3>
+        <div className={styles.underline}></div>
+        <div className={styles.content}>
+          {services.map(service => (
+            <div key={service.id} className={styles.text}>
+              <h4>{service.title}</h4>
+              <p>{service.description}</p>
+              <img src={service.image_url} alt={service.title} />
+              <a href={service.slug} className={styles.readMore}>READ MORE</a>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default ServiceSection;
