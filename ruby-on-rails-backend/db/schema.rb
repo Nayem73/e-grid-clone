@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_30_150406) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_02_071417) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,9 +39,18 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_30_150406) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "services", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "service_translations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "service_id", null: false
+    t.string "locale", null: false
     t.string "title"
     t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_id", "locale"], name: "index_service_translations_on_service_id_and_locale", unique: true
+    t.index ["service_id"], name: "index_service_translations_on_service_id"
+  end
+
+  create_table "services", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "image_url"
     t.string "slug"
     t.datetime "created_at", null: false
@@ -51,4 +60,5 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_30_150406) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "service_translations", "services"
 end
