@@ -18,7 +18,7 @@ module Api
       @service = Service.new(service_params)
 
       if @service.save
-        render json: @service, status: :created, location: api_service_url(@service)
+        render json: @service.as_json(include: :service_translations), status: :created, location: api_service_url(@service)
       else
         render json: @service.errors, status: :unprocessable_entity
       end
@@ -27,7 +27,7 @@ module Api
     # PUT /api/services/:id
     def update
       if @service.update(service_params)
-        render json: @service
+        render json: @service, include: :service_translations
       else
         render json: @service.errors, status: :unprocessable_entity
       end
@@ -45,7 +45,10 @@ module Api
     end
 
     def service_params
-      params.require(:service).permit(:image_url, :slug, service_translations_attributes: [:locale, :title, :description])
+      params.require(:service).permit(
+        :slug,
+        service_translations_attributes: [:id, :locale, :title, :description, :image_url]
+      )
     end
   end
 end

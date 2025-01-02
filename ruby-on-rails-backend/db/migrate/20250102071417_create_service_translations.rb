@@ -5,6 +5,7 @@ class CreateServiceTranslations < ActiveRecord::Migration[8.0]
       t.string :locale, null: false
       t.string :title
       t.text :description
+      t.string :image_url
 
       t.timestamps
     end

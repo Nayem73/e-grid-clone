@@ -7,11 +7,11 @@ interface ServiceTranslation {
   locale: string;
   title: string;
   description: string;
+  image_url: string;
 }
 
 interface Service {
   id: number;
-  image_url: string;
   slug: string;
   service_translations: ServiceTranslation[];
 }
@@ -54,7 +54,7 @@ const ServiceSection: React.FC = () => {
                   <a href={service.slug} className={styles.readMore}>READ MORE</a>
                 </div>
                 <div className={styles.image}>
-                  <img src={service.image_url} alt={translation.title} />
+                  <img src={translation.image_url} alt={translation.title} />
                 </div>
               </div>
             );

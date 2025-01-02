@@ -44,6 +44,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_02_071417) do
     t.string "locale", null: false
     t.string "title"
     t.text "description"
+    t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["service_id", "locale"], name: "index_service_translations_on_service_id_and_locale", unique: true
@@ -51,7 +52,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_02_071417) do
   end
 
   create_table "services", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "image_url"
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
