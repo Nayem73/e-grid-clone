@@ -1,12 +1,12 @@
-import HeroSection from '../components/HeroSection';
 import ServiceSection from '../components/ServiceSection';
 import ProductsSection from '../components/ProductsSection';
 import NewsSection from '../components/NewsSection';
 import RecruitSection from '../components/RecruitSection';
+import Carousel from '../components/Carousel';
 
 const Home = () => (
   <div>
-    <HeroSection />
+    <Carousel />
     <ServiceSection />
     <ProductsSection />
     <NewsSection />

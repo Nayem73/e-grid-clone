@@ -1,9 +1,23 @@
 module Api
   class CarouselTranslationsController < ApplicationController
     # GET /api/carousel_translations
+    # GET /api/carousel_translations?locale=en
     def index
-      @carousel_translations = CarouselTranslation.all
-      render json: @carousel_translations
+      if params[:locale]
+        translation = CarouselTranslation.find_by(locale: params[:locale])
+        if translation
+          render json: {
+            locale: translation.locale,
+            title: translation.title,
+            description: translation.description
+          }
+        else
+          render json: { error: 'Translation not found' }, status: :not_found
+        end
+      else
+        @carousel_translations = CarouselTranslation.all
+        render json: @carousel_translations
+      end
     end
 
     # GET /api/carousel_translations/:id
