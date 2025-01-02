@@ -4,20 +4,21 @@ module Api
 
     # GET /api/services
     def index
-      @services = Service.all
-      render json: @services
+      @services = Service.includes(:service_translations).all
+      render json: @services, include: :service_translations
     end
 
     # GET /api/services/:id
     def show
-      render json: @service
+      render json: @service, include: :service_translations
     end
 
     # POST /api/services
     def create
       @service = Service.new(service_params)
+
       if @service.save
-        render json: @service, status: :created
+        render json: @service, status: :created, location: api_service_url(@service)
       else
         render json: @service.errors, status: :unprocessable_entity
       end
@@ -44,7 +45,7 @@ module Api
     end
 
     def service_params
-      params.require(:service).permit(:title, :description, :image_url, :slug)
+      params.require(:service).permit(:image_url, :slug, service_translations_attributes: [:locale, :title, :description])
     end
   end
 end
