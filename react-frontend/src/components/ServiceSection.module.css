@@ -1,60 +1,86 @@
 .services {
-  padding: 4rem 2rem;
-  background-color: #f9f9f9;
+  padding: 50px 0;
 }
 
 .container {
-  max-width: 1200px;
+  width: 90%;
   margin: 0 auto;
-  text-align: center;
 }
 
 .heading {
+  text-align: center;
   font-size: 2rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 10px;
 }
 
 .subheading {
-  font-size: 1.5rem;
-  color: #C5A572;
-  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #999;
 }
 
 .underline {
   width: 50px;
   height: 4px;
-  background-color: #C5A572;
-  margin: 0 auto 2rem;
+  background: #000;
+  margin: 10px auto 30px;
 }
 
 .content {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.serviceItem {
+  display: flex;
   align-items: center;
+  gap: 20px;
+}
+
+.serviceItem.left {
+  flex-direction: row;
+}
+
+.serviceItem.right {
+  flex-direction: row-reverse;
 }
 
 .text {
   flex: 1;
-  padding-right: 2rem;
 }
 
-.images {
+.text h4 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.text p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.text .readMore {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.3s;
+}
+
+.text .readMore:hover {
+  background: #444;
+}
+
+.image {
   flex: 1;
-  display: flex;
-  gap: 1rem;
 }
 
-.images img {
+.image img {
   width: 100%;
   height: auto;
-  border-radius: 8px;
-}
-
-.readMore {
-  background-color: #333;
-  color: white;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  object-fit: cover;
 }

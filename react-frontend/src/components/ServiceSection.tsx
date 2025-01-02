@@ -23,8 +23,6 @@ const ServiceSection: React.FC = () => {
       });
   }, []);
 
-  console.log(services);
-
   return (
     <section className={styles.services}>
       <div className={styles.container}>
@@ -32,12 +30,18 @@ const ServiceSection: React.FC = () => {
         <h3 className={styles.subheading}>service</h3>
         <div className={styles.underline}></div>
         <div className={styles.content}>
-          {services.map(service => (
-            <div key={service.id} className={styles.text}>
-              <h4>{service.title}</h4>
-              <p>{service.description}</p>
-              <img src={service.image_url} alt={service.title} />
-              <a href={service.slug} className={styles.readMore}>READ MORE</a>
+          {services.map((service, index) => (
+            <div
+              key={service.id}
+              className={`${styles.serviceItem} ${index % 2 === 0 ? styles.left : styles.right}`}>
+              <div className={styles.text}>
+                <h4>{service.title}</h4>
+                <p>{service.description}</p>
+                <a href={service.slug} className={styles.readMore}>READ MORE</a>
+              </div>
+              <div className={styles.image}>
+                <img src={service.image_url} alt={service.title} />
+              </div>
             </div>
           ))}
         </div>
