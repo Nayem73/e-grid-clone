@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './ServiceSection.module.css';
+import { useLanguage } from '../contexts/LanguageContext';
+
+interface ServiceTranslation {
+  locale: string;
+  title: string;
+  description: string;
+}
 
 interface Service {
   id: number;
-  title: string;
-  description: string;
   image_url: string;
   slug: string;
+  service_translations: ServiceTranslation[];
 }
 
 const ServiceSection: React.FC = () => {
   const [services, setServices] = useState<Service[]>([]);
+  const { language } = useLanguage();
 
   useEffect(() => {
     axios.get('http://localhost:3000/api/services')
@@ -30,20 +37,28 @@ const ServiceSection: React.FC = () => {
         <h3 className={styles.subheading}>service</h3>
         <div className={styles.underline}></div>
         <div className={styles.content}>
-          {services.map((service, index) => (
-            <div
-              key={service.id}
-              className={`${styles.serviceItem} ${index % 2 === 0 ? styles.left : styles.right}`}>
-              <div className={styles.text}>
-                <h4>{service.title}</h4>
-                <p>{service.description}</p>
-                <a href={service.slug} className={styles.readMore}>READ MORE</a>
+          {services.map((service, index) => {
+            const translation = service.service_translations.find(t => t.locale === language);
+
+            if (!translation) {
+              return null; // Skip services without a translation in the selected language
+            }
+
+            return (
+              <div
+                key={service.id}
+                className={`${styles.serviceItem} ${index % 2 === 0 ? styles.left : styles.right}`}>
+                <div className={styles.text}>
+                  <h4>{translation.title}</h4>
+                  <p>{translation.description}</p>
+                  <a href={service.slug} className={styles.readMore}>READ MORE</a>
+                </div>
+                <div className={styles.image}>
+                  <img src={service.image_url} alt={translation.title} />
+                </div>
               </div>
-              <div className={styles.image}>
-                <img src={service.image_url} alt={service.title} />
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

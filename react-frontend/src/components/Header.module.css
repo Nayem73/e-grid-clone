@@ -36,3 +36,18 @@ nav a {
   border-radius: 5px;
   color: white;
 }
+
+.languageButton {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-left: 20px;
+  transition: background 0.3s;
+}
+
+.languageButton:hover {
+  background-color: #444;
+}
