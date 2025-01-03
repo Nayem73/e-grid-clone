@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_02_125500) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_03_044859) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -53,6 +53,34 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_02_125500) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "service_softwaredev_result_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "service_softwaredev_result_id", null: false
+    t.string "locale", null: false
+    t.string "system_name"
+    t.string "language"
+    t.text "scope"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_softwaredev_result_id"], name: "idx_on_service_softwaredev_result_id_0c4aa8c832"
+  end
+
+  create_table "service_softwaredev_results", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "service_softwaredevs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "locale", null: false
+    t.text "description"
+    t.text "main_dev_language_1"
+    t.text "main_dev_language_2"
+    t.string "image_url"
+    t.text "others"
+    t.text "contact_form"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "service_translations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "service_id", null: false
     t.string "locale", null: false
@@ -74,5 +102,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_02_125500) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "service_softwaredev_result_details", "service_softwaredev_results"
   add_foreign_key "service_translations", "services"
 end
