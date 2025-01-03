@@ -40,19 +40,21 @@ const ServiceSoftwareDevResult: React.FC = () => {
       .catch((error) => console.error('Error fetching software development data:', error));
   }, [language]);
 
-  // Fetch result details
+  // Fetch all service software development results and their details
   useEffect(() => {
     axios
       .get('http://localhost:3000/api/service_softwaredev_results')
       .then((response) => {
-        const results = response.data[0]?.service_softwaredev_result_details || [];
-        const filteredResults = results.filter((result: ServiceSoftwareDevResultDetail) => result.locale === language);
+        // Combine all results from the API
+        const allResults = response.data.map((result: ServiceSoftwareDevResult) => result.service_softwaredev_result_details);
+        // Flatten the results array and filter by locale
+        const filteredResults = allResults.flat().filter(
+          (result: ServiceSoftwareDevResultDetail) => result.locale === language
+        );
         setResultDetails(filteredResults);
       })
       .catch((error) => console.error('Error fetching result details:', error));
   }, [language]);
-
-  console.log(resultDetails);
 
   return (
     <div className={styles.container}>
