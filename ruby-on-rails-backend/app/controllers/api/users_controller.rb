@@ -35,6 +35,12 @@ module Api
       end
     end
 
+    # LOGOUT
+    def logout
+      cookies.delete(:auth_token) # Clear the auth_token cookie
+      render json: { message: 'Logged out successfully' }, status: :ok
+    end
+
     private
 
     def user_params
