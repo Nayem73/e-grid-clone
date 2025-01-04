@@ -2,12 +2,22 @@ import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 import { FaFacebook, FaTwitter } from 'react-icons/fa';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 
 const Header = () => {
   const { language, setLanguage } = useLanguage();
+  const { user, logout } = useAuth();
 
   const toggleLanguage = () => {
     setLanguage(language === 'jp' ? 'en' : 'jp');
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
   };
 
   return (
@@ -27,6 +37,11 @@ const Header = () => {
           <Link to="/recruit">RECRUIT</Link>
           <Link to="/access">ACCESS</Link>
           <Link to="/contact" className={styles.contactButton}>CONTACT</Link>
+          {user && (
+            <button onClick={handleLogout} className={styles.logoutButton}>
+              Admin Logout
+            </button>
+          )}
         </nav>
         <button onClick={toggleLanguage} className={styles.languageButton}>
           {language === 'jp' ? 'EN' : 'JP'}

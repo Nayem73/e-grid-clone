@@ -8,24 +8,29 @@ import Contact from './pages/Contact';
 import './App.css';
 import { LanguageProvider } from './contexts/LanguageContext';
 import ServiceSoftwareDevResult from './pages/ServiceSoftwareDevResult';
+import { AuthProvider } from './contexts/AuthContext';
+import Login from './pages/Login';
 
 function App() {
   return (
-    <LanguageProvider>
-      <Router>
-        <Header />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/service/softwaredev_result" element={<ServiceSoftwareDevResult />} />
-          </Routes>
-        </main>
-        <Footer />
-      </Router>
-    </LanguageProvider>
+    <AuthProvider>
+      <LanguageProvider>
+        <Router>
+          <Header />
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/service/softwaredev_result" element={<ServiceSoftwareDevResult />} />
+              <Route path="/admin/login" element={<Login />} />
+            </Routes>
+          </main>
+          <Footer />
+        </Router>
+      </LanguageProvider>
+    </AuthProvider>
   );
 }
 
