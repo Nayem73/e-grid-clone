@@ -78,25 +78,123 @@
 }
 
 .editButton {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  background: none;
+  border: none;
   padding: 4px;
   cursor: pointer;
+  color: #666;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.7;
-  z-index: 1;
+  transition: all 0.2s ease;
 }
 
 .editButton:hover {
-  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #333;
 }
 
 .content {
   padding-right: 30px;
+}
+
+.tableRow {
+  transition: background-color 0.2s ease;
+}
+
+.tableRow:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.formGroup .textarea {
+  width: 100%;
+  min-height: 60px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.modalBody {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.saveButton,
+.cancelButton {
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.saveButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.saveButton:disabled {
+  background-color: #ccc;
+}
+
+.cancelButton {
+  background-color: #fff;
+  border: 1px solid #ccc;
 }
