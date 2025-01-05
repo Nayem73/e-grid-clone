@@ -10,9 +10,9 @@
 }
 
 .mainContent img {
-  max-width: 300px;
+  max-width: 200px;
   height: auto;
-  margin: 20px 0;
+  margin-bottom: 20px;
   display: block;
 }
 
