@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import axios from 'axios';
+import axios from '../api/axios'; // Use the configured axios instance
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import styles from './Carousel.module.css';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -27,14 +27,14 @@ const Carousel: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3000/api/carousel_images')
+      .get('/carousel_images')
       .then((response) => setCarouselImages(response.data))
       .catch((error) => console.error('Error fetching carousel images:', error));
   }, []);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/carousel_translations?locale=${language}`)
+      .get(`/carousel_translations?locale=${language}`)
       .then((response) => setTranslation(response.data))
       .catch((error) => console.error('Error fetching carousel translation:', error));
   }, [language]);
@@ -42,18 +42,16 @@ const Carousel: React.FC = () => {
   const nextSlide = () => {
     if (carouselImages.length > 0) {
       if (currentSlide === carouselImages.length - 1) {
-        // Temporarily disable the transition for instant reset
         if (carouselRef.current) {
           carouselRef.current.style.transition = 'none';
         }
         setCurrentSlide(0);
 
-        // Re-enable the transition after resetting to the first slide
         setTimeout(() => {
           if (carouselRef.current) {
             carouselRef.current.style.transition = `transform ${transitionDuration}ms ease-out`;
           }
-        }, 20); // Delay slightly to allow DOM changes to apply
+        }, 20);
       } else {
         setCurrentSlide((prevSlide) => prevSlide + 1);
       }
@@ -77,7 +75,7 @@ const Carousel: React.FC = () => {
       nextSlide();
     }, 4000);
 
-    return () => clearInterval(interval); // Clear interval on component unmount
+    return () => clearInterval(interval);
   }, [carouselImages, currentSlide]);
 
   return (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../api/axios';
 import styles from './ServiceSoftwareDevResult.module.css';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -32,22 +32,18 @@ const ServiceSoftwareDevResult: React.FC = () => {
   const [resultDetails, setResultDetails] = useState<ServiceSoftwareDevResultDetail[]>([]);
   const { language } = useLanguage();
 
-  // Fetch main content
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/service_softwaredev?locale=${language}`)
+      .get(`/service_softwaredev?locale=${language}`)
       .then((response) => setSoftwareDev(response.data))
       .catch((error) => console.error('Error fetching software development data:', error));
   }, [language]);
 
-  // Fetch all service software development results and their details
   useEffect(() => {
     axios
-      .get('http://localhost:3000/api/service_softwaredev_results')
+      .get('/service_softwaredev_results')
       .then((response) => {
-        // Combine all results from the API
         const allResults = response.data.map((result: ServiceSoftwareDevResult) => result.service_softwaredev_result_details);
-        // Flatten the results array and filter by locale
         const filteredResults = allResults.flat().filter(
           (result: ServiceSoftwareDevResultDetail) => result.locale === language
         );
@@ -58,7 +54,6 @@ const ServiceSoftwareDevResult: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      {/* Main Content Section */}
       {softwareDev && (
         <div className={styles.mainContent}>
           <h2>Software Development Service</h2>
@@ -76,7 +71,6 @@ const ServiceSoftwareDevResult: React.FC = () => {
         </div>
       )}
 
-      {/* Result Details Section */}
       <div className={styles.resultDetails}>
         <h3>Development Results</h3>
         <table className={styles.table}>

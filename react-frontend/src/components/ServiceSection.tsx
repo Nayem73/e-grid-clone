@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../api/axios';
 import styles from './ServiceSection.module.css';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -21,13 +21,16 @@ const ServiceSection: React.FC = () => {
   const { language } = useLanguage();
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/services')
-      .then(response => {
+    const fetchServices = async () => {
+      try {
+        const response = await axios.get('/services');
         setServices(response.data);
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('There was an error fetching the services!', error);
-      });
+      }
+    };
+
+    fetchServices();
   }, []);
 
   return (
