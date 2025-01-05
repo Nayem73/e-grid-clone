@@ -10,7 +10,6 @@
   padding: 0;
 }
 
-/* Updated heading styles */
 .heading {
   text-align: center;
   font-size: 3rem;
@@ -30,16 +29,13 @@
   margin-top: 15px;
 }
 
-/* Updated underline styles */
 .underline {
   width: 80px;
   height: 3px;
   background: #C5A572;
-  /* Golden color */
   margin: 0 auto 40px;
 }
 
-/* Rest of the styles remain the same */
 .content {
   display: flex;
   flex-direction: column;
@@ -69,7 +65,7 @@
 .text {
   width: 50%;
   max-width: 600px;
-  padding: 0 40px;
+  padding: 0 70px;
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -92,6 +88,7 @@
   color: #666;
   margin-bottom: 30px;
   line-height: 1.6;
+  text-align: justify;
 }
 
 .text .readMore {
