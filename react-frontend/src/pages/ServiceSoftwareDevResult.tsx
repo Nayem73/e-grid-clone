@@ -54,20 +54,26 @@ const ServiceSoftwareDevResult: React.FC = () => {
 
   return (
     <div className={styles.container}>
+      <h1>SOFTWAREDEV_RESULT</h1>
+      <h2 className={styles.subtitle}>Software Development Track Record</h2>
+
       {softwareDev && (
         <div className={styles.mainContent}>
-          <h2>Software Development Service</h2>
-          <p>{softwareDev.description}</p>
-          <h3>Main Development Language 1</h3>
-          <p>{softwareDev.main_dev_language_1}</p>
+          <p className={styles.preserveWhitespace}>{softwareDev.description}</p>
+
+          <div className={styles.preserveWhitespace}>
+            <p>{softwareDev.main_dev_language_1}</p>
+          </div>
+
           <img src={softwareDev.image_url} alt="Ruby Certification" className={styles.image} />
-          <h3>Main Development Language 2</h3>
-          <p>{softwareDev.main_dev_language_2}</p>
-          <h3>Other Tools</h3>
-          <p>{softwareDev.others}</p>
-          <a href={softwareDev.contact_form} className={styles.contactLink} target="_blank" rel="noopener noreferrer">
-            Contact Form
-          </a>
+
+          <div className={styles.preserveWhitespace}>
+            <p>{softwareDev.main_dev_language_2}</p>
+          </div>
+
+          <div className={styles.preserveWhitespace}>
+            <p>{softwareDev.others}</p>
+          </div>
         </div>
       )}
 

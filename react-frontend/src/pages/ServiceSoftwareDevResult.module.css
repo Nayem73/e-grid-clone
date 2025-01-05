@@ -1,15 +1,19 @@
 .container {
   padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .mainContent {
   margin-bottom: 40px;
+  line-height: 1.6;
 }
 
 .mainContent img {
-  max-width: 100%;
+  max-width: 300px;
   height: auto;
   margin: 20px 0;
+  display: block;
 }
 
 .contactLink {
@@ -45,4 +49,20 @@
 
 .table th {
   background-color: #f4f4f4;
+}
+
+.subtitle {
+  color: #666;
+  text-align: center;
+  margin-bottom: 40px;
+  font-weight: normal;
+}
+
+.preserveWhitespace {
+  white-space: pre-line;
+  margin-bottom: 20px;
+}
+
+.preserveWhitespace p {
+  margin: 0 0 10px 0;
 }
