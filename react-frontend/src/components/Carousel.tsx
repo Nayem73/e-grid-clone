@@ -23,7 +23,7 @@ const Carousel: React.FC = () => {
   const { language } = useLanguage();
 
   const carouselRef = useRef<HTMLDivElement | null>(null);
-  const transitionDuration = 500; // Match CSS transition duration (ms)
+  const transitionDuration = 1000; // Match CSS transition duration (ms)
 
   useEffect(() => {
     axios
@@ -75,27 +75,22 @@ const Carousel: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 3000);
+    }, 4000);
 
     return () => clearInterval(interval); // Clear interval on component unmount
   }, [carouselImages, currentSlide]);
 
   return (
-    <section className={styles.carouselSection}>
-      <div
-        ref={carouselRef}
-        className={styles.carousel}
-        style={{
-          transform: `translateX(-${currentSlide * 100}%)`,
-          transition: `transform ${transitionDuration}ms ease-out`,
-        }}
-      >
-        {carouselImages.map((image) => (
-          <div key={image.id} className={styles.carouselItem}>
-            <img src={image.image_url} alt={`Slide ${image.id}`} />
-          </div>
-        ))}
-      </div>
+    <div className={styles.carouselSection}>
+      {carouselImages.map((image, index) => (
+        <div
+          key={image.id}
+          className={`${styles.carouselItem} ${index === currentSlide ? styles.active : styles.inactive
+            }`}
+        >
+          <img src={image.image_url} alt={`Slide ${image.id}`} />
+        </div>
+      ))}
 
       <div className={styles.textContent}>
         <h1>OUR MISSION</h1>
@@ -118,7 +113,7 @@ const Carousel: React.FC = () => {
           />
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

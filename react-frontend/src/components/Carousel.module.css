@@ -1,9 +1,20 @@
 .carouselSection {
   position: relative;
   width: 100%;
-  height: 100vh;
+  /* This aspect ratio better matches the image proportions shown */
+  aspect-ratio: 21/9;
+  /* Prevent extremes on very large/small screens */
+  max-height: 800px;
+  min-height: 300px;
   overflow: hidden;
   background-color: black;
+}
+
+.carouselItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .carousel {
@@ -13,15 +24,26 @@
 }
 
 .carouselItem {
-  flex-shrink: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease, visibility 1s ease;
 }
 
-.carouselItem img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.carouselItem.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+
+.carouselItem.inactive {
+  opacity: 0;
+  visibility: hidden;
+  z-index: 0;
 }
 
 .textContent {
