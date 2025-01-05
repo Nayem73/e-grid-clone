@@ -66,3 +66,37 @@
 .preserveWhitespace p {
   margin: 0 0 10px 0;
 }
+
+.editableField {
+  position: relative;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.editableField:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.editButton {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  z-index: 1;
+}
+
+.editButton:hover {
+  opacity: 1;
+}
+
+.content {
+  padding-right: 30px;
+}

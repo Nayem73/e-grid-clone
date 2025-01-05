@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from '../api/axios';
 import styles from './ServiceSoftwareDevResult.module.css';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
+import EditableField from '../components/EditableField';
+import EditModal from '../components/EditModal';
 
 interface ServiceSoftwareDev {
   id: number;
@@ -22,35 +25,68 @@ interface ServiceSoftwareDevResultDetail {
   scope: string;
 }
 
-interface ServiceSoftwareDevResult {
-  id: number;
-  service_softwaredev_result_details: ServiceSoftwareDevResultDetail[];
-}
-
 const ServiceSoftwareDevResult: React.FC = () => {
   const [softwareDev, setSoftwareDev] = useState<ServiceSoftwareDev | null>(null);
   const [resultDetails, setResultDetails] = useState<ServiceSoftwareDevResultDetail[]>([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editField, setEditField] = useState<string>('');
+  const [editValue, setEditValue] = useState<string>('');
   const { language } = useLanguage();
+  const { user } = useAuth();
 
-  useEffect(() => {
+  const fetchSoftwareDev = () => {
+    const localeId = language === 'en' ? 1 : 2;
     axios
-      .get(`/service_softwaredev?locale=${language}`)
+      .get(`/service_softwaredev/${localeId}`)
       .then((response) => setSoftwareDev(response.data))
       .catch((error) => console.error('Error fetching software development data:', error));
-  }, [language]);
+  };
 
-  useEffect(() => {
+  const fetchResultDetails = () => {
     axios
       .get('/service_softwaredev_results')
       .then((response) => {
-        const allResults = response.data.map((result: ServiceSoftwareDevResult) => result.service_softwaredev_result_details);
+        const allResults = response.data.map(
+          (result: { service_softwaredev_result_details: ServiceSoftwareDevResultDetail[] }) => result.service_softwaredev_result_details
+        );
         const filteredResults = allResults.flat().filter(
           (result: ServiceSoftwareDevResultDetail) => result.locale === language
         );
         setResultDetails(filteredResults);
       })
       .catch((error) => console.error('Error fetching result details:', error));
+  };
+
+  useEffect(() => {
+    fetchSoftwareDev();
+    fetchResultDetails();
   }, [language]);
+
+  const handleEditClick = async (field: string, value: string): Promise<void> => {
+    setEditField(field);
+    setEditValue(value);
+    setIsEditing(true);
+  };
+
+  const handleSave = async (value: string): Promise<void> => {
+    if (softwareDev && editField) {
+      const updatedSoftwareDev = {
+        service_softwaredev: {
+          ...softwareDev,
+          [editField]: value,
+        },
+      };
+
+      try {
+        await axios.put(`/service_softwaredev/${softwareDev.id}`, updatedSoftwareDev);
+        setSoftwareDev({ ...softwareDev, [editField]: value });
+        setIsEditing(false);
+      } catch (error) {
+        console.error('Error saving updated software development data:', error);
+        throw error;
+      }
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -59,21 +95,36 @@ const ServiceSoftwareDevResult: React.FC = () => {
 
       {softwareDev && (
         <div className={styles.mainContent}>
-          <p className={styles.preserveWhitespace}>{softwareDev.description}</p>
+          <EditableField
+            value={softwareDev.description}
+            fieldName="Description"
+            isAdmin={!!user}
+            onEdit={() => Promise.resolve(handleEditClick('description', softwareDev.description))}
+            className={styles.preserveWhitespace}
+          />
 
-          <div className={styles.preserveWhitespace}>
-            <p>{softwareDev.main_dev_language_1}</p>
-          </div>
+          <EditableField
+            value={softwareDev.main_dev_language_1}
+            fieldName="Main Development Language 1"
+            isAdmin={!!user}
+            onEdit={() => handleEditClick('main_dev_language_1', softwareDev.main_dev_language_1)}
+          />
 
           <img src={softwareDev.image_url} alt="Ruby Certification" className={styles.image} />
 
-          <div className={styles.preserveWhitespace}>
-            <p>{softwareDev.main_dev_language_2}</p>
-          </div>
+          <EditableField
+            value={softwareDev.main_dev_language_2}
+            fieldName="Main Development Language 2"
+            isAdmin={!!user}
+            onEdit={() => handleEditClick('main_dev_language_2', softwareDev.main_dev_language_2)}
+          />
 
-          <div className={styles.preserveWhitespace}>
-            <p>{softwareDev.others}</p>
-          </div>
+          <EditableField
+            value={softwareDev.others}
+            fieldName="Others"
+            isAdmin={!!user}
+            onEdit={() => handleEditClick('others', softwareDev.others)}
+          />
         </div>
       )}
 
@@ -98,6 +149,16 @@ const ServiceSoftwareDevResult: React.FC = () => {
           </tbody>
         </table>
       </div>
+
+      {isEditing && (
+        <EditModal
+          isOpen={isEditing}
+          onClose={() => setIsEditing(false)}
+          onSave={handleSave}
+          value={editValue}
+          fieldName={editField}
+        />
+      )}
     </div>
   );
 };

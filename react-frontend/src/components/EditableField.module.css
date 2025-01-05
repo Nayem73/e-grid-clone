@@ -1,0 +1,43 @@
+.editableField {
+  position: relative;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.editableField:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.content {
+  flex-grow: 1;
+  white-space: pre-line;
+  line-height: 1.5;
+}
+
+.editButton {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: #666;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.editButton:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+.editButton:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
