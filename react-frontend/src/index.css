@@ -1,16 +1,11 @@
-/* src/index.css */
-
-/* First, import Lato from Google Fonts if you haven't already */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 
-/* Reset default styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Set up font fallback chain */
 :root {
   font-family: "Lato", "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック体", YuGothic,
     "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN",
@@ -18,7 +13,6 @@
     "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 }
 
-/* Ensure all elements inherit the font family */
 body,
 button,
 input,
@@ -27,24 +21,26 @@ textarea {
   font-family: inherit;
 }
 
-/* Maintain your existing body styles */
+html,
 body {
-  margin: 0;
-  padding: 0;
+  width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
+  position: relative;
+}
+
+body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Ensure proper box-sizing inheritance */
 *,
 *:before,
 *:after {
   box-sizing: inherit;
 }
 
-/* Maintain your existing main styles */
 main {
   overflow-x: hidden;
   width: 100%;
