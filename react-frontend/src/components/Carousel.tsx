@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import styles from './Carousel.module.css';
@@ -22,6 +22,9 @@ const Carousel: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { language } = useLanguage();
 
+  const carouselRef = useRef<HTMLDivElement | null>(null);
+  const transitionDuration = 500; // Match CSS transition duration (ms)
+
   useEffect(() => {
     axios
       .get('http://localhost:3000/api/carousel_images')
@@ -37,26 +40,55 @@ const Carousel: React.FC = () => {
   }, [language]);
 
   const nextSlide = () => {
-    setCurrentSlide((prevSlide) =>
-      prevSlide === carouselImages.length - 1 ? 0 : prevSlide + 1
-    );
+    if (carouselImages.length > 0) {
+      if (currentSlide === carouselImages.length - 1) {
+        // Temporarily disable the transition for instant reset
+        if (carouselRef.current) {
+          carouselRef.current.style.transition = 'none';
+        }
+        setCurrentSlide(0);
+
+        // Re-enable the transition after resetting to the first slide
+        setTimeout(() => {
+          if (carouselRef.current) {
+            carouselRef.current.style.transition = `transform ${transitionDuration}ms ease-out`;
+          }
+        }, 20); // Delay slightly to allow DOM changes to apply
+      } else {
+        setCurrentSlide((prevSlide) => prevSlide + 1);
+      }
+    }
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prevSlide) =>
-      prevSlide === 0 ? carouselImages.length - 1 : prevSlide - 1
-    );
+    if (carouselImages.length > 0) {
+      setCurrentSlide((prevSlide) =>
+        prevSlide === 0 ? carouselImages.length - 1 : prevSlide - 1
+      );
+    }
   };
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 3000);
+
+    return () => clearInterval(interval); // Clear interval on component unmount
+  }, [carouselImages, currentSlide]);
+
   return (
     <section className={styles.carouselSection}>
       <div
+        ref={carouselRef}
         className={styles.carousel}
-        style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+        style={{
+          transform: `translateX(-${currentSlide * 100}%)`,
+          transition: `transform ${transitionDuration}ms ease-out`,
+        }}
       >
         {carouselImages.map((image) => (
           <div key={image.id} className={styles.carouselItem}>
