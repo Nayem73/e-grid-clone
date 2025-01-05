@@ -34,20 +34,18 @@ const ServiceSection: React.FC = () => {
     <section className={styles.services}>
       <div className={styles.container}>
         <h2 className={styles.heading}>SERVICE</h2>
-        <h3 className={styles.subheading}>service</h3>
         <div className={styles.underline}></div>
+        <h3 className={styles.subheading}>service</h3>
         <div className={styles.content}>
           {services.map((service, index) => {
             const translation = service.service_translations.find(t => t.locale === language);
-
-            if (!translation) {
-              return null; // Skip services without a translation in the selected language
-            }
+            if (!translation) return null;
 
             return (
               <div
                 key={service.id}
-                className={`${styles.serviceItem} ${index % 2 === 0 ? styles.left : styles.right}`}>
+                className={`${styles.serviceItem} ${index % 2 === 0 ? styles.left : styles.right}`}
+              >
                 <div className={styles.text}>
                   <h4>{translation.title}</h4>
                   <p>{translation.description}</p>

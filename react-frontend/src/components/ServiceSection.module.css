@@ -1,41 +1,61 @@
 .services {
   padding: 50px 0;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 .container {
-  width: 90%;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0;
 }
 
+/* Updated heading styles */
 .heading {
   text-align: center;
-  font-size: 2rem;
-  margin-bottom: 10px;
+  font-size: 3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+  margin-top: 40px;
 }
 
 .subheading {
   text-align: center;
-  font-size: 1.2rem;
-  color: #999;
+  font-size: 1.1rem;
+  color: #666;
+  font-weight: normal;
+  text-transform: lowercase;
+  margin-top: 15px;
 }
 
+/* Updated underline styles */
 .underline {
-  width: 50px;
-  height: 4px;
-  background: #000;
-  margin: 10px auto 30px;
+  width: 80px;
+  height: 3px;
+  background: #C5A572;
+  /* Golden color */
+  margin: 0 auto 40px;
 }
 
+/* Rest of the styles remain the same */
 .content {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 160px;
+  padding: 80px 0;
 }
 
 .serviceItem {
   display: flex;
   align-items: center;
-  gap: 20px;
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 
 .serviceItem.left {
@@ -47,18 +67,31 @@
 }
 
 .text {
-  flex: 1;
+  width: 50%;
+  max-width: 600px;
+  padding: 0 40px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.serviceItem.left .text {
+  text-align: left;
+}
+
+.serviceItem.right .text {
+  text-align: right;
 }
 
 .text h4 {
   font-size: 1.5rem;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .text p {
   font-size: 1rem;
   color: #666;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  line-height: 1.6;
 }
 
 .text .readMore {
@@ -76,11 +109,35 @@
 }
 
 .image {
-  flex: 1;
+  width: 50%;
+  display: flex;
+  align-items: center;
 }
 
 .image img {
   width: 100%;
   height: auto;
-  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .serviceItem {
+    flex-direction: column;
+  }
+
+  .serviceItem.left,
+  .serviceItem.right {
+    flex-direction: column;
+  }
+
+  .text,
+  .image {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .serviceItem.left .text,
+  .serviceItem.right .text {
+    text-align: left;
+  }
 }
