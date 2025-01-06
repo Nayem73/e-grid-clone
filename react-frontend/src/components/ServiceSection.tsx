@@ -38,7 +38,9 @@ const ServiceSection: React.FC = () => {
       <div className={styles.container}>
         <h2 className={styles.heading}>SERVICE</h2>
         <div className={styles.underline}></div>
-        <h3 className={styles.subheading}>service</h3>
+        <h3 className={styles.subheading}>
+          {language === 'en' ? 'Service' : language === 'jp' ? 'サービス' : 'Service'}
+        </h3>
         <div className={styles.content}>
           {services.map((service, index) => {
             const translation = service.service_translations.find(t => t.locale === language);
