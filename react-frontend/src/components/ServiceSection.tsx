@@ -23,6 +23,7 @@ interface Service {
 
 interface ServiceEdit {
   service_id: number;
+  slug: string;
   enTranslation: ServiceTranslation;
   jpTranslation: ServiceTranslation;
   activeLocale: string;
@@ -54,6 +55,7 @@ const ServiceSection: React.FC = () => {
 
     setEditingService({
       service_id: service.id,
+      slug: service.slug,
       enTranslation,
       jpTranslation,
       activeLocale: language
@@ -61,12 +63,12 @@ const ServiceSection: React.FC = () => {
     setIsEditing(true);
   };
 
-  const handleSave = async (values: { title: string; description: string; image_url: string }) => {
+  const handleSave = async (values: { title: string; description: string; image_url: string; slug: string }) => {
     if (!editingService) return;
 
     const updatedService = {
       service: {
-        slug: services.find(s => s.id === editingService.service_id)?.slug,
+        slug: values.slug,
         service_translations_attributes: [
           {
             id: editingService.enTranslation.id,
@@ -194,6 +196,17 @@ const ServiceSection: React.FC = () => {
                   className={styles.textarea}
                 />
               </div>
+              <div className={styles.formGroup}>
+                <label>Read More Slug</label>
+                <textarea
+                  value={editingService.slug}
+                  onChange={(e) => setEditingService({
+                    ...editingService,
+                    slug: e.target.value
+                  })}
+                  className={styles.textarea}
+                />
+              </div>
             </div>
             <div className={styles.modalFooter}>
               <button
@@ -204,7 +217,8 @@ const ServiceSection: React.FC = () => {
                   description: editingService.activeLocale === 'en' ?
                     editingService.enTranslation.description :
                     editingService.jpTranslation.description,
-                  image_url: editingService.enTranslation.image_url
+                  image_url: editingService.enTranslation.image_url,
+                  slug: editingService.slug
                 })}
                 className={styles.saveButton}
               >
