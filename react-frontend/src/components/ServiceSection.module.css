@@ -29,6 +29,7 @@
   font-weight: bold;
   text-transform: lowercase;
   margin-top: 20px;
+  margin-bottom: 40px;
 }
 
 .underline {
@@ -54,6 +55,11 @@
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
+  transition: background-color 0.2s ease;
+}
+
+.serviceItem.isAdmin:hover {
+  background-color: rgba(0, 0, 0, 0.02);
 }
 
 .serviceItem.left {
@@ -85,15 +91,15 @@
   margin-bottom: 20px;
 }
 
-.text p {
-  font-size: 1rem;
-  color: #666;
-  margin-bottom: 30px;
+.preserveWhitespace {
+  white-space: pre-line;
+  margin-bottom: 20px;
   line-height: 1.6;
+  color: #666;
   text-align: justify;
 }
 
-.text .readMore {
+.readMore {
   padding: 15px 20px;
   font-size: 16px;
   background-color: #333;
@@ -108,7 +114,7 @@
   display: inline-block;
 }
 
-.text .readMore:hover {
+.readMore:hover {
   background-color: white;
   color: #C09D51;
   border: 2px solid #C09D51;
@@ -124,6 +130,98 @@
   width: 100%;
   height: auto;
   display: block;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.modalBody {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 60px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.saveButton,
+.cancelButton {
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.saveButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.saveButton:disabled {
+  background-color: #ccc;
+}
+
+.cancelButton {
+  background-color: #fff;
+  border: 1px solid #ccc;
 }
 
 @media (max-width: 768px) {
@@ -158,16 +256,10 @@
     width: 100%;
     height: auto;
     object-fit: cover;
-    display: block;
   }
 
   .serviceItem.left .text,
   .serviceItem.right .text {
     text-align: left;
-  }
-
-  .text .readMore {
-    padding: 10px 15px;
-    font-size: 14px;
   }
 }
