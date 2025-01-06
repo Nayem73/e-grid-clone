@@ -195,8 +195,11 @@ const ServiceSoftwareDevResult: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <h1>SOFTWAREDEV_RESULT</h1>
-      <h2 className={styles.subtitle}>Software Development Track Record</h2>
+      <h2 className={styles.heading}>softwaredev_result</h2>
+      <div className={styles.underline}></div>
+      <h3 className={styles.subheading}>
+        {language === 'en' ? 'Software Development Track Record' : language === 'jp' ? 'ソフトウェア開発実績' : 'Software Development Track Record'}
+      </h3>
 
       {softwareDev && (
         <div className={styles.mainContent}>
