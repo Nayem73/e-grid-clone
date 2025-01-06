@@ -246,7 +246,10 @@ const ServiceSoftwareDevResult: React.FC = () => {
           </thead>
           <tbody>
             {resultDetails.map((detail) => (
-              <tr key={detail.id} className={styles.tableRow}>
+              <tr
+                key={detail.id}
+                className={`${styles.tableRow} ${user ? styles.isAdmin : ''}`}
+              >
                 <td>{detail.system_name}</td>
                 <td>{detail.language}</td>
                 <td>{detail.scope}</td>
