@@ -21,7 +21,7 @@ const EditableField: React.FC<EditableFieldProps> = ({
 
   return (
     <div
-      className={`${styles.editableField} ${className}`}
+      className={`${styles.editableField} ${isAdmin ? styles.isAdmin : ''} ${className}`}
       onMouseEnter={() => isAdmin && setShowEditIcon(true)}
       onMouseLeave={() => setShowEditIcon(false)}
     >
