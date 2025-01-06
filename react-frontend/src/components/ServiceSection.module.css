@@ -165,4 +165,9 @@
   .serviceItem.right .text {
     text-align: left;
   }
+
+  .text .readMore {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
 }
