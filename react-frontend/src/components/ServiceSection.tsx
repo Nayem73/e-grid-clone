@@ -116,12 +116,9 @@ const ServiceSection: React.FC = () => {
                 className={`${styles.serviceItem} ${index % 2 === 0 ? styles.left : styles.right} ${user ? styles.isAdmin : ''}`}
               >
                 <div className={styles.text}>
-                  <EditableField
-                    value={translation.title}
-                    fieldName="Title"
-                    isAdmin={!!user}
-                    onEdit={() => handleServiceEdit(service)}
-                  />
+                  <h4 className={styles.title}>
+                    {translation.title}
+                  </h4>
                   <EditableField
                     value={translation.description}
                     fieldName="Description"

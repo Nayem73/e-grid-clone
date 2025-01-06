@@ -112,6 +112,7 @@
   font-weight: 600;
   text-decoration: none;
   display: inline-block;
+  margin: 10px 0;
 }
 
 .readMore:hover {
@@ -261,5 +262,10 @@
   .serviceItem.left .text,
   .serviceItem.right .text {
     text-align: left;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
   }
 }
