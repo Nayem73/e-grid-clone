@@ -14,7 +14,7 @@
 
 .heading {
   text-align: center;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 15px;
@@ -28,14 +28,14 @@
   color: #666;
   font-weight: normal;
   text-transform: lowercase;
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .underline {
-  width: 80px;
-  height: 3px;
+  width: 100px;
+  height: 5px;
   background: #C5A572;
-  margin: 0 auto 40px;
+  margin: 0 auto 20px;
 }
 
 .content {
