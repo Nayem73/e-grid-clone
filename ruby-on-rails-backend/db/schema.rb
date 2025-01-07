@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_07_050102) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_07_150538) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -107,6 +107,28 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_07_050102) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "webresult_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "category_name_en"
+    t.string "category_name_jp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "webresult_category_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "locale"
+    t.string "company_name"
+    t.string "service_name"
+    t.text "details"
+    t.string "image_url"
+    t.string "slug"
+    t.bigint "webresult_category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "position"
+    t.index ["position"], name: "index_webresult_category_details_on_position"
+    t.index ["webresult_category_id"], name: "index_webresult_category_details_on_webresult_category_id"
+  end
+
   create_table "webresult_experiences", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "description"
     t.string "marketing_title"
@@ -119,4 +141,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_07_050102) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "service_softwaredev_result_details", "service_softwaredev_results"
   add_foreign_key "service_translations", "services"
+  add_foreign_key "webresult_category_details", "webresult_categories"
 end
