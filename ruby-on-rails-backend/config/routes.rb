@@ -10,6 +10,12 @@ Rails.application.routes.draw do
     get "/auto_login", to: "users#auto_login"
     delete "/logout", to: "users#logout"
     resources :webresult_experiences
-    resources :webresult_categories
+    resources :webresult_categories do
+      collection do
+        post :update_positions
+        post :update_detail
+        post :create_with_translations
+      end
+    end  
   end
 end

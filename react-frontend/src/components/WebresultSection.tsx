@@ -47,10 +47,21 @@ const WebresultSection: React.FC = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get('/webresult_categories');
-      setCategories(response.data);
+      const sortedCategories = response.data.map((category: WebresultCategory) => ({
+        ...category,
+        webresult_category_details: category.webresult_category_details.sort((a, b) => a.position - b.position)
+      }));
+      setCategories(sortedCategories);
     } catch (error) {
       console.error('Error fetching categories:', error);
     }
+  };
+
+  const getPairedDetail = (details: WebresultCategoryDetail[], detail: WebresultCategoryDetail) => {
+    return details.find(d =>
+      d.webresult_category_id === detail.webresult_category_id &&
+      d.locale !== detail.locale
+    );
   };
 
   const handleDragEnd = async (result: any) => {
@@ -62,14 +73,18 @@ const WebresultSection: React.FC = () => {
 
     if (!category) return;
 
-    const newDetails = Array.from(category.webresult_category_details);
-    const [movedDetail] = newDetails.splice(source.index, 1);
-    newDetails.splice(destination.index, 0, movedDetail);
+    const allDetails = [...category.webresult_category_details];
+    const currentLocaleDetails = allDetails.filter(d => d.locale === language);
+    const [movedDetail] = currentLocaleDetails.splice(source.index, 1);
+    currentLocaleDetails.splice(destination.index, 0, movedDetail);
 
-    const updatedPositions = newDetails.map((detail, index) => ({
-      id: detail.id,
-      position: index + 1
-    }));
+    const updatedPositions = currentLocaleDetails.flatMap((detail, index) => {
+      const pairedDetail = getPairedDetail(allDetails, detail);
+      return [
+        { id: detail.id, position: index * 2 },
+        { id: pairedDetail!.id, position: index * 2 + 1 }
+      ];
+    });
 
     try {
       await axios.post('/webresult_categories/update_positions', {
@@ -78,15 +93,20 @@ const WebresultSection: React.FC = () => {
 
       setCategories(prev => prev.map(cat => {
         if (cat.id === categoryId) {
+          const updatedDetails = cat.webresult_category_details.map(detail => {
+            const position = updatedPositions.find(p => p.id === detail.id)?.position;
+            return position !== undefined ? { ...detail, position } : detail;
+          });
           return {
             ...cat,
-            webresult_category_details: newDetails
+            webresult_category_details: updatedDetails.sort((a, b) => a.position - b.position)
           };
         }
         return cat;
       }));
     } catch (error) {
       console.error('Error updating positions:', error);
+      fetchCategories();
     }
   };
 
@@ -161,6 +181,7 @@ const WebresultSection: React.FC = () => {
                   >
                     {category.webresult_category_details
                       .filter(detail => detail.locale === language)
+                      .sort((a, b) => a.position - b.position)
                       .map((detail, index) => (
                         <Draggable
                           key={detail.id}

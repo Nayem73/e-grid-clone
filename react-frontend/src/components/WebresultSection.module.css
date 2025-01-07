@@ -23,6 +23,7 @@
 
 .category {
   margin-bottom: 20px;
+  overflow: visible;
 }
 
 .categoryTitle {
@@ -34,6 +35,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  max-height: none;
+  overflow: visible;
 }
 
 .resultItem {
