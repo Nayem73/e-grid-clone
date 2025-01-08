@@ -11,6 +11,7 @@ import ServiceSoftwareDevResult from './pages/ServiceSoftwareDevResult';
 import { AuthProvider } from './contexts/AuthContext';
 import Login from './pages/Login';
 import ServiceWebResult from './pages/ServiceWebresult';
+import WebresultSection from './components/WebresultSection';
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
               <Route path="/services" element={<Services />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/service/softwaredev_result" element={<ServiceSoftwareDevResult />} />
-              <Route path="/service/web_result" element={<ServiceWebResult />} />
+              <Route path="/service/web_result" element={<WebresultSection />} />
               <Route path="/admin/login" element={<Login />} />
             </Routes>
           </main>

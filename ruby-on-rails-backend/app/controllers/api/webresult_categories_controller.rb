@@ -5,7 +5,7 @@ module Api
     # GET /api/webresult_categories
     def index
       @categories = WebresultCategory.includes(:webresult_category_details)
-                                   .order('webresult_category_details.position ASC')
+                                   .order(position: :asc)
       render json: @categories, include: :webresult_category_details
     end
 
@@ -51,8 +51,8 @@ module Api
     def update_positions
       ActiveRecord::Base.transaction do
         params[:positions].each do |position_update|
-          detail = WebresultCategoryDetail.find(position_update[:id])
-          detail.update!(position: position_update[:position])
+          category = WebresultCategory.find(position_update[:id])
+          category.update!(position: position_update[:position] + 1) # Convert 0-based to 1-based
         end
         
         head :ok
@@ -133,6 +133,7 @@ module Api
       params.require(:webresult_category).permit(
         :category_name_en,
         :category_name_jp,
+        :position,
         webresult_category_details_attributes: [
           :id,
           :locale,
@@ -141,7 +142,6 @@ module Api
           :details,
           :image_url,
           :slug,
-          :position,
           :_destroy
         ]
       )
@@ -153,8 +153,7 @@ module Api
         :service_name,
         :details,
         :image_url,
-        :slug,
-        :position
+        :slug
       )
     end
   end
