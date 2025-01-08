@@ -1,0 +1,26 @@
+/* Add these styles to your existing ServiceSoftwareDevResult.module.css file */
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.line {
+  width: 50px;
+  height: 1px;
+  background-color: #000;
+  margin-right: 20px;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  color: #003366;
+  font-weight: bold;
+  margin: 0;
+}
+
+.marketingTitle {
+  color: #0066cc;
+  margin-top: 30px;
+}
