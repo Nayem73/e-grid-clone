@@ -175,25 +175,28 @@ const WebresultSection: React.FC = () => {
                                   className={`${styles.resultItem} ${index % 2 === 0 ? styles.row : styles.rowReverse}`}
                                 >
                                   <div className={styles.image}>
-                                    <img src={detail.image_url} alt={detail.company_name} />
+                                    <a href={detail.slug}>
+                                      <img src={detail.image_url} alt={detail.company_name} />
+                                    </a>
                                   </div>
                                   <div className={styles.text}>
                                     <h4 className={styles.companyName}>
                                       {detail.company_name}
                                     </h4>
-                                    <EditableField
-                                      value={detail.service_name}
-                                      fieldName="Service Name"
-                                      isAdmin={!!user}
-                                      onEdit={async () => handleDetailEdit(category, detail)}
-                                      className={styles.preserveWhitespace}
-                                    />
+                                    <a href={detail.slug} className={styles.serviceNameLink}>
+                                      <EditableField
+                                        value={detail.service_name}
+                                        fieldName="Service Name"
+                                        isAdmin={!!user}
+                                        onEdit={async () => handleDetailEdit(category, detail)}
+                                        className={styles.preserveWhitespace}
+                                      />
+                                    </a>
                                     <div className={styles.tags}>
                                       {detail.details.split(', ').map((tag, i) => (
                                         <span key={i} className={styles.tag}>{tag}</span>
                                       ))}
                                     </div>
-                                    <a href={detail.slug} className={styles.readMore}>READ MORE</a>
                                   </div>
                                 </div>
                               ))}
