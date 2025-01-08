@@ -163,14 +163,20 @@ const WebresultSection: React.FC = () => {
                           {...provided.dragHandleProps}
                           className={styles.resultItem} // Applies grid styles
                         >
-                          <h3 className={styles.categoryTitle}>
+                          {/* <h3 className={styles.categoryTitle}>
                             {language === 'en' ? category.category_name_en : category.category_name_jp}
-                          </h3>
+                          </h3> */}
                           <div className={styles.content}>
                             {category.webresult_category_details
-                              .filter(detail => detail.locale === language)
-                              .map((detail) => (
-                                <div key={detail.id} className={styles.resultItem}>
+                              .filter((detail) => detail.locale === language)
+                              .map((detail, index) => (
+                                <div
+                                  key={detail.id}
+                                  className={`${styles.resultItem} ${index % 2 === 0 ? styles.row : styles.rowReverse}`}
+                                >
+                                  <div className={styles.image}>
+                                    <img src={detail.image_url} alt={detail.company_name} />
+                                  </div>
                                   <div className={styles.text}>
                                     <h4 className={styles.companyName}>
                                       {detail.company_name}
@@ -188,9 +194,6 @@ const WebresultSection: React.FC = () => {
                                       ))}
                                     </div>
                                     <a href={detail.slug} className={styles.readMore}>READ MORE</a>
-                                  </div>
-                                  <div className={styles.image}>
-                                    <img src={detail.image_url} alt={detail.company_name} />
                                   </div>
                                 </div>
                               ))}

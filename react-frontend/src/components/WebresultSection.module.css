@@ -1,7 +1,62 @@
+.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 48px;
+  /* Increased from 10px for more spacing /
+  max-height: none;
+  overflow: visible;
+  background-color: #fff;
+  / Set white background */
+}
+
 .webresults {
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #fff;
+  /* Change to white background */
 }
+
+.resultItem:nth-child(even) {
+  flex-direction: row-reverse;
+  /* Reverse order for even rows */
+}
+
+.resultItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  /* Add spacing between image and text */
+}
+
+.row {
+  flex-direction: row;
+  /* Default layout: image first, text second */
+}
+
+.rowReverse {
+  flex-direction: row-reverse;
+  /* Reverse layout: text first, image second */
+}
+
+.image img {
+  max-width: 150px;
+  /* Set a maximum width for the image /
+  max-height: 150px;
+  / Set a maximum height for the image /
+  object-fit: cover;
+  / Maintain aspect ratio and crop excess /
+  border-radius: 4px;
+  / Optional: Slightly round the corners */
+}
+
+.text {
+  flex: 1;
+  /* Allow the text to take up remaining space /
+  margin-bottom: 0;
+  / Ensure no extra space below the text /
+  text-align: left;
+  / Align text to the left */
+}
+
 .categoriesContainer {
   display: flex;
   flex-direction: column;
@@ -36,28 +91,6 @@
   margin-bottom: 10px;
 }
 
-.content {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: 10px;
-  max-height: none;
-  overflow: visible;
-}
-
-.resultItem {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.text {
-  flex: 1;
-}
-
 .companyName {
   font-size: 1.2rem;
   margin-bottom: 5px;
@@ -89,15 +122,6 @@
 
 .readMore:hover {
   text-decoration: underline;
-}
-
-.image {
-  margin-top: 10px;
-}
-
-.image img {
-  max-width: 100%;
-  border-radius: 4px;
 }
 
 .modalOverlay {
