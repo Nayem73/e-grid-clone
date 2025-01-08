@@ -183,15 +183,23 @@ const WebresultSection: React.FC = () => {
                                     <h4 className={styles.companyName}>
                                       {detail.company_name}
                                     </h4>
-                                    <a href={detail.slug} className={styles.serviceNameLink}>
-                                      <EditableField
-                                        value={detail.service_name}
-                                        fieldName="Service Name"
-                                        isAdmin={!!user}
-                                        onEdit={async () => handleDetailEdit(category, detail)}
-                                        className={styles.preserveWhitespace}
-                                      />
-                                    </a>
+                                    <div className={styles.serviceNameContainer}>
+                                      <a
+                                        href={detail.slug}
+                                        className={styles.serviceNameLink}
+                                        onClick={(e) => {
+                                          if (user) e.preventDefault();
+                                        }}
+                                      >
+                                        <EditableField
+                                          value={detail.service_name}
+                                          fieldName="Service Name"
+                                          isAdmin={!!user}
+                                          onEdit={() => handleDetailEdit(category, detail)}
+                                          className={styles.preserveWhitespace}
+                                        />
+                                      </a>
+                                    </div>
                                     <div className={styles.tags}>
                                       {detail.details.split(', ').map((tag, i) => (
                                         <span key={i} className={styles.tag}>{tag}</span>
