@@ -142,8 +142,8 @@ const WebresultSection: React.FC = () => {
   return (
     <section className={styles.webresults}>
       <div className={styles.container}>
-        <h2 className={styles.heading}>WEB RESULT</h2>
-        <div className={styles.underline}></div>
+        {/* <h2 className={styles.heading}>WEB RESULT</h2> */}
+        {/* <div className={styles.underline}></div> */}
         <DragDropContext onDragEnd={handleDragEnd}>
           {categories.length > 0 && (
             <Droppable droppableId="categories" direction="vertical">

@@ -1,90 +1,59 @@
 .content {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
   gap: 48px;
-  /* Increased from 10px for more spacing /
   max-height: none;
   overflow: visible;
   background-color: #fff;
-  / Set white background */
-}
-
-.webresults {
-  padding: 20px;
-  background-color: #fff;
-  /* Change to white background */
-}
-
-.resultItem:nth-child(even) {
-  flex-direction: row-reverse;
-  /* Reverse order for even rows */
 }
 
 .resultItem {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  /* Add spacing between image and text */
-}
-
-.row {
-  flex-direction: row;
-  /* Default layout: image first, text second */
-}
-
-.rowReverse {
-  flex-direction: row-reverse;
-  /* Reverse layout: text first, image second */
+  align-items: flex-start;
+  gap: 24px;
 }
 
 .image img {
-  max-width: 150px;
-  /* Set a maximum width for the image /
-  max-height: 150px;
-  / Set a maximum height for the image /
+  max-width: 280px;
+  max-height: auto;
   object-fit: cover;
-  / Maintain aspect ratio and crop excess /
   border-radius: 4px;
-  / Optional: Slightly round the corners */
 }
 
-.text {
-  flex: 1;
-  /* Allow the text to take up remaining space /
-  margin-bottom: 0;
-  / Ensure no extra space below the text /
-  text-align: left;
-  / Align text to the left */
-}
-
-.categoriesContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
 .serviceNameLink {
-  color: inherit;
+  color: #000;
+  font-size: 1.2rem;
 }
 
 .serviceNameLink:hover {
   text-decoration: underline;
 }
 
+.companyName {
+  font-weight: bold;
+}
+
+.categoriesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .heading {
   font-size: 2rem;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
 }
 
 .underline {
   width: 100px;
   height: 4px;
-  background-color: #000000;
+  background-color: #000;
   margin: 0 auto 20px;
 }
 
@@ -108,27 +77,19 @@
 }
 
 .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
   margin-top: 10px;
 }
 
 .tag {
   display: inline-block;
-  background-color: #eee;
+  background-color: #d6e6f6;
   border-radius: 3px;
   padding: 2px 5px;
   margin-right: 5px;
   font-size: 0.9rem;
-}
-
-.readMore {
-  display: inline-block;
-  margin-top: 10px;
-  color: #007bff;
-  text-decoration: none;
-}
-
-.readMore:hover {
-  text-decoration: underline;
 }
 
 .modalOverlay {
