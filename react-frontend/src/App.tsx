@@ -10,7 +10,6 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import ServiceSoftwareDevResult from './pages/ServiceSoftwareDevResult';
 import { AuthProvider } from './contexts/AuthContext';
 import Login from './pages/Login';
-import ServiceWebResult from './pages/ServiceWebresult';
 import WebresultSection from './components/WebresultSection';
 
 function App() {

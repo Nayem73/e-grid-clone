@@ -15,7 +15,6 @@ interface WebresultCategoryDetail {
   details: string;
   image_url: string;
   slug: string;
-  position: number;
   webresult_category_id: number;
 }
 
@@ -23,6 +22,7 @@ interface WebresultCategory {
   id: number;
   category_name_en: string;
   category_name_jp: string;
+  position: number;
   webresult_category_details: WebresultCategoryDetail[];
 }
 
@@ -47,63 +47,41 @@ const WebresultSection: React.FC = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get('/webresult_categories');
-      const sortedCategories = response.data.map((category: WebresultCategory) => ({
-        ...category,
-        webresult_category_details: category.webresult_category_details.sort((a, b) => a.position - b.position)
-      }));
-      setCategories(sortedCategories);
+      setCategories(response.data);
     } catch (error) {
       console.error('Error fetching categories:', error);
     }
-  };
-
-  const getPairedDetail = (details: WebresultCategoryDetail[], detail: WebresultCategoryDetail) => {
-    return details.find(d =>
-      d.webresult_category_id === detail.webresult_category_id &&
-      d.locale !== detail.locale
-    );
   };
 
   const handleDragEnd = async (result: any) => {
     if (!result.destination) return;
 
     const { source, destination } = result;
-    const categoryId = parseInt(source.droppableId);
-    const category = categories.find(c => c.id === categoryId);
 
-    if (!category) return;
+    // Create a new array of categories
+    const updatedCategories = Array.from(categories);
 
-    const allDetails = [...category.webresult_category_details];
-    const currentLocaleDetails = allDetails.filter(d => d.locale === language);
-    const [movedDetail] = currentLocaleDetails.splice(source.index, 1);
-    currentLocaleDetails.splice(destination.index, 0, movedDetail);
+    // Remove the dragged item from its source
+    const [removed] = updatedCategories.splice(source.index, 1);
+    // Insert it at the destination
+    updatedCategories.splice(destination.index, 0, removed);
 
-    const updatedPositions = currentLocaleDetails.flatMap((detail, index) => {
-      const pairedDetail = getPairedDetail(allDetails, detail);
-      return [
-        { id: detail.id, position: index * 2 },
-        { id: pairedDetail!.id, position: index * 2 + 1 }
-      ];
-    });
+    // Update positions (1-based)
+    const positions = updatedCategories.map((category, index) => ({
+      id: category.id,
+      position: index + 1
+    }));
 
     try {
       await axios.post('/webresult_categories/update_positions', {
-        positions: updatedPositions
+        positions: positions
       });
 
-      setCategories(prev => prev.map(cat => {
-        if (cat.id === categoryId) {
-          const updatedDetails = cat.webresult_category_details.map(detail => {
-            const position = updatedPositions.find(p => p.id === detail.id)?.position;
-            return position !== undefined ? { ...detail, position } : detail;
-          });
-          return {
-            ...cat,
-            webresult_category_details: updatedDetails.sort((a, b) => a.position - b.position)
-          };
-        }
-        return cat;
-      }));
+      // Update local state with new positions
+      setCategories(updatedCategories.map((category, index) => ({
+        ...category,
+        position: index + 1
+      })));
     } catch (error) {
       console.error('Error updating positions:', error);
       fetchCategories();
@@ -167,66 +145,68 @@ const WebresultSection: React.FC = () => {
         <h2 className={styles.heading}>WEB RESULT</h2>
         <div className={styles.underline}></div>
         <DragDropContext onDragEnd={handleDragEnd}>
-          {categories.map((category) => (
-            <div key={category.id} className={styles.category}>
-              <h3 className={styles.categoryTitle}>
-                {language === 'en' ? category.category_name_en : category.category_name_jp}
-              </h3>
-              <Droppable droppableId={category.id.toString()}>
-                {(provided) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                    className={styles.content}
-                  >
-                    {category.webresult_category_details
-                      .filter(detail => detail.locale === language)
-                      .sort((a, b) => a.position - b.position)
-                      .map((detail, index) => (
-                        <Draggable
-                          key={detail.id}
-                          draggableId={detail.id.toString()}
-                          index={index}
-                          isDragDisabled={!user}
+          {categories.length > 0 && (
+            <Droppable droppableId="categories">
+              {(provided) => (
+                <div
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  {categories.map((category, index) => (
+                    <Draggable
+                      key={`category-${category.id}`}
+                      draggableId={`category-${category.id}`}
+                      index={index}
+                      isDragDisabled={!user}
+                    >
+                      {(provided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          className={styles.category}
                         >
-                          {(provided) => (
-                            <div
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                              className={styles.resultItem}
-                            >
-                              <div className={styles.text}>
-                                <h4 className={styles.companyName}>
-                                  {detail.company_name}
-                                </h4>
-                                <EditableField
-                                  value={detail.service_name}
-                                  fieldName="Service Name"
-                                  isAdmin={!!user}
-                                  onEdit={async () => handleDetailEdit(category, detail)}
-                                  className={styles.preserveWhitespace}
-                                />
-                                <div className={styles.tags}>
-                                  {detail.details.split(', ').map((tag, i) => (
-                                    <span key={i} className={styles.tag}>{tag}</span>
-                                  ))}
+                          <h3 className={styles.categoryTitle}>
+                            {language === 'en' ? category.category_name_en : category.category_name_jp}
+                          </h3>
+                          <div className={styles.content}>
+                            {category.webresult_category_details
+                              .filter(detail => detail.locale === language)
+                              .map((detail) => (
+                                <div key={detail.id} className={styles.resultItem}>
+                                  <div className={styles.text}>
+                                    <h4 className={styles.companyName}>
+                                      {detail.company_name}
+                                    </h4>
+                                    <EditableField
+                                      value={detail.service_name}
+                                      fieldName="Service Name"
+                                      isAdmin={!!user}
+                                      onEdit={async () => handleDetailEdit(category, detail)}
+                                      className={styles.preserveWhitespace}
+                                    />
+                                    <div className={styles.tags}>
+                                      {detail.details.split(', ').map((tag, i) => (
+                                        <span key={i} className={styles.tag}>{tag}</span>
+                                      ))}
+                                    </div>
+                                    <a href={detail.slug} className={styles.readMore}>READ MORE</a>
+                                  </div>
+                                  <div className={styles.image}>
+                                    <img src={detail.image_url} alt={detail.company_name} />
+                                  </div>
                                 </div>
-                                <a href={detail.slug} className={styles.readMore}>READ MORE</a>
-                              </div>
-                              <div className={styles.image}>
-                                <img src={detail.image_url} alt={detail.company_name} />
-                              </div>
-                            </div>
-                          )}
-                        </Draggable>
-                      ))}
-                    {provided.placeholder}
-                  </div>
-                )}
-              </Droppable>
-            </div>
-          ))}
+                              ))}
+                          </div>
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          )}
         </DragDropContext>
       </div>
 

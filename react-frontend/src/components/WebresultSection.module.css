@@ -2,6 +2,11 @@
   padding: 20px;
   background-color: #f9f9f9;
 }
+.categoriesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
 
 .container {
   max-width: 1200px;
