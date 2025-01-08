@@ -146,12 +146,9 @@ const WebresultSection: React.FC = () => {
         <div className={styles.underline}></div>
         <DragDropContext onDragEnd={handleDragEnd}>
           {categories.length > 0 && (
-            <Droppable droppableId="categories">
+            <Droppable droppableId="categories" direction="vertical">
               {(provided) => (
-                <div
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                >
+                <div ref={provided.innerRef} {...provided.droppableProps} className={styles.content}>
                   {categories.map((category, index) => (
                     <Draggable
                       key={`category-${category.id}`}
@@ -164,7 +161,7 @@ const WebresultSection: React.FC = () => {
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
-                          className={styles.category}
+                          className={styles.resultItem} // Applies grid styles
                         >
                           <h3 className={styles.categoryTitle}>
                             {language === 'en' ? category.category_name_en : category.category_name_jp}
