@@ -10,7 +10,7 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import ServiceSoftwareDevResult from './pages/ServiceSoftwareDevResult';
 import { AuthProvider } from './contexts/AuthContext';
 import Login from './pages/Login';
-import WebresultSection from './components/WebresultSection';
+import ServiceWebResult from './pages/ServiceWebResult';
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
               <Route path="/services" element={<Services />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/service/softwaredev_result" element={<ServiceSoftwareDevResult />} />
-              <Route path="/service/web_result" element={<WebresultSection />} />
+              <Route path="/service/web_result" element={<ServiceWebResult />} />
               <Route path="/admin/login" element={<Login />} />
             </Routes>
           </main>

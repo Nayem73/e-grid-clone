@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_08_105542) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_09_031526) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -127,6 +127,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_08_105542) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["webresult_category_id"], name: "index_webresult_category_details_on_webresult_category_id"
+  end
+
+  create_table "webresult_category_titles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title_en"
+    t.string "title_jp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "webresult_experiences", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

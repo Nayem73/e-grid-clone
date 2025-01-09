@@ -5,6 +5,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import EditableField from '../components/EditableField';
 import EditModal from '../components/EditModal';
+import WebresultSection from '../components/WebresultSection';
 
 interface WebExperience {
   locale: string;
@@ -105,6 +106,7 @@ const ServiceWebResult: React.FC = () => {
           fieldName={editField}
         />
       )}
+      <WebresultSection />
     </div>
   );
 };
