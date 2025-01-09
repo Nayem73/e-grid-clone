@@ -1,5 +1,5 @@
 import ServiceSection from '../components/ServiceSection';
-import ProductsSection from '../components/ProductsSection';
+import ProductSection from '../components/ProductSection';
 import NewsSection from '../components/NewsSection';
 import RecruitSection from '../components/RecruitSection';
 import Carousel from '../components/Carousel';
@@ -9,7 +9,7 @@ const Home = () => (
   <div className={styles.homeContainer}>
     <Carousel />
     <ServiceSection />
-    <ProductsSection />
+    <ProductSection />
     <NewsSection />
     <RecruitSection />
   </div>
