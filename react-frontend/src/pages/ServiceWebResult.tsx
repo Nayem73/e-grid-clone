@@ -78,7 +78,9 @@ const ServiceWebResult: React.FC = () => {
         <div className={styles.mainContent}>
           <div className={styles.sectionHeader}>
             <div className={styles.line}></div>
-            <h2 className={styles.sectionTitle}>Website creation experience</h2>
+            <h2 className={styles.sectionTitle}>
+              {language === 'en' ? 'Website creation experience' : 'Webサイト制作実績'}
+            </h2>
           </div>
 
           <EditableField
