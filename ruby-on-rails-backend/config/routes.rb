@@ -17,6 +17,7 @@ Rails.application.routes.draw do
         post :create_with_translations
       end
     end
-    resources :webresult_category_titles  
+    resources :webresult_category_titles
+    resources :products  
   end
 end

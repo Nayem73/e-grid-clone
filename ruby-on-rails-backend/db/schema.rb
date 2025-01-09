@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_09_031526) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_09_093728) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -51,6 +51,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_09_031526) do
     t.text "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "product_translations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.string "locale", null: false
+    t.string "title"
+    t.text "description"
+    t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id", "locale"], name: "index_product_translations_on_product_id_and_locale", unique: true
+    t.index ["product_id"], name: "index_product_translations_on_product_id"
+  end
+
+  create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_products_on_slug", unique: true
   end
 
   create_table "service_softwaredev_result_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -146,6 +165,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_09_031526) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "product_translations", "products"
   add_foreign_key "service_softwaredev_result_details", "service_softwaredev_results"
   add_foreign_key "service_translations", "services"
   add_foreign_key "webresult_category_details", "webresult_categories"
