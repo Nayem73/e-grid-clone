@@ -6,6 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 import EditableField from '../components/EditableField';
 import EditModal from '../components/EditModal';
 import WebresultSection from '../components/WebresultSection';
+import CategoryGrid from '../components/CategoryGrid';
 
 interface WebExperience {
   locale: string;
@@ -106,6 +107,7 @@ const ServiceWebResult: React.FC = () => {
           fieldName={editField}
         />
       )}
+      <CategoryGrid />
       <WebresultSection />
     </div>
   );
