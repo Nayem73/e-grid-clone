@@ -169,6 +169,11 @@ const NewsSection: React.FC = () => {
             );
           })}
         </div>
+        <div className={styles.readMoreWrapper}>
+          <a href="https://www.e-grid.co.jp/news/" className={styles.readMore}>
+            READ MORE
+          </a>
+        </div>
       </div>
 
       {isEditing && editingNews && (
