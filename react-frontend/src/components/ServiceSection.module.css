@@ -211,9 +211,13 @@
 }
 
 .saveButton {
-  background-color: #007bff;
+  background-color: #D4AF37;
   color: white;
   border: none;
+}
+
+.saveButton:hover {
+  background-color: #c4a030;
 }
 
 .saveButton:disabled {
@@ -221,8 +225,13 @@
 }
 
 .cancelButton {
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.cancelButton:hover {
+  background-color: #e5e5e5;
 }
 
 @media (max-width: 768px) {

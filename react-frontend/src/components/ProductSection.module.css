@@ -11,24 +11,29 @@
 
 .heading {
   text-align: center;
-  font-size: 32px;
+  font-size: 2.5rem;
   font-weight: bold;
-  color: #333;
-  margin-bottom: 10px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+  margin-top: 40px;
 }
 
 .underline {
-  width: 60px;
-  height: 3px;
-  background-color: #D4AF37;
-  margin: 0 auto 20px;
+  width: 100px;
+    height: 5px;
+    background: #C09D51;
+    margin: 0 auto 20px;
 }
 
 .subheading {
   text-align: center;
-  font-size: 24px;
+  font-size: 1.1rem;
   color: #666;
-  margin-bottom: 50px;
+  font-weight: bold;
+  text-transform: lowercase;
+  margin-top: 20px;
+  margin-bottom: 40px;
 }
 
 .content {
