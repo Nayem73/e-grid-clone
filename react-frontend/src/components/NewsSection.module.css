@@ -4,9 +4,9 @@
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 1300px;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 20px;
 }
 
 .heading {
@@ -49,7 +49,6 @@
   flex-direction: column;
   background: #fff;
   transition: transform 0.3s ease;
-  /* border: 1px solid #eee; */
   overflow: hidden;
   text-decoration: none;
   color: inherit;
@@ -61,16 +60,16 @@
 
 .imageContainer {
   width: 100%;
-  /* height: 240px; */
+  height: auto;
   overflow: hidden;
   position: relative;
-  padding: 5px;
 }
 
 .newsImage {
   width: 100%;
   height: auto;
   object-fit: contain;
+  display: block;
   transition: transform 0.3s ease;
 }
 
@@ -79,7 +78,7 @@
 }
 
 .textContent {
-  padding: 25px;
+  padding: 25px 0;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -91,12 +90,14 @@
   align-items: center;
   margin-bottom: 15px;
   gap: 15px;
+  padding: 0 25px;
 }
 
 .date {
   font-size: 0.9rem;
-  color: #666;
+  color: #d22525;
   font-family: 'Arial', sans-serif;
+  text-decoration: none;
 }
 
 .category {
@@ -106,13 +107,14 @@
   font-size: 0.8rem;
   text-transform: lowercase;
   border-radius: 2px;
+  text-decoration: none;
 }
 
 .title {
   font-size: 1.2rem;
   font-weight: bold;
   color: #333;
-  margin-bottom: 12px;
+  margin: 0 25px 12px 25px;
   line-height: 1.4;
   transition: color 0.3s ease;
 }
@@ -121,7 +123,7 @@
   font-size: 0.9rem;
   color: #666;
   line-height: 1.6;
-  margin-bottom: 20px;
+  margin: 0 25px 20px 25px;
 }
 
 .newsLink {
@@ -129,7 +131,7 @@
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: bold;
-  margin-top: auto;
+  margin: auto 25px 0 25px;
   transition: color 0.3s ease;
 }
 
@@ -171,6 +173,7 @@
   padding: 5px;
   border-radius: 4px;
   outline: none;
+  margin: 0 25px;
 }
 
 /* Modal styles */
@@ -304,10 +307,6 @@
     grid-template-columns: 1fr;
   }
 
-  .imageContainer {
-    height: 200px;
-  }
-
   .modalContent {
     width: 95%;
     padding: 20px;
@@ -326,17 +325,13 @@
   }
 
   .textContent {
-    padding: 20px;
+    padding: 20px 0;
   }
 }
 
 @media (max-width: 480px) {
   .news {
     padding: 40px 15px;
-  }
-
-  .imageContainer {
-    height: 180px;
   }
 
   .heading {

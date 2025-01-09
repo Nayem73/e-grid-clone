@@ -123,13 +123,32 @@ const NewsSection: React.FC = () => {
 
             return (
               <div key={newsItem.id} className={`${styles.newsCard} ${user ? styles.isAdmin : ''}`}>
-                <div className={styles.imageContainer}>
+                <a
+                  href={newsItem.slug}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.imageContainer}
+                >
                   <img src={translation.image_url} alt={translation.title} className={styles.newsImage} />
-                </div>
+                </a>
                 <div className={styles.textContent}>
                   <div className={styles.dateCategory}>
-                    <span className={styles.date}>{formatDate(newsItem.created_at)}</span>
-                    <span className={styles.category}>notice</span>
+                    <a
+                      href={newsItem.slug}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.date}
+                    >
+                      {formatDate(newsItem.created_at)}
+                    </a>
+                    <a
+                      href={newsItem.slug}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.category}
+                    >
+                      notice
+                    </a>
                   </div>
                   <EditableField
                     value={translation.title}
@@ -145,9 +164,6 @@ const NewsSection: React.FC = () => {
                     onEdit={() => handleNewsEdit(newsItem)}
                     className={`${styles.description} ${styles.preserveWhitespace}`}
                   />
-                  <a href={newsItem.slug} className={styles.newsLink} target="_blank" rel="noopener noreferrer">
-                    Read More
-                  </a>
                 </div>
               </div>
             );
