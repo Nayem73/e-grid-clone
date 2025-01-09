@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../api/axios';
-import styles from './ServiceSoftwareDevResult.module.css';
+import styles from './ServiceWebResult.module.css';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import EditableField from '../components/EditableField';
@@ -70,7 +70,8 @@ const ServiceWebResult: React.FC = () => {
       <h2 className={styles.heading}>WORKS</h2>
       <div className={styles.underline}></div>
       <h3 className={styles.subheading}>
-        Site creation and marketing (SEO, listing, affiliate, Facebook) track record
+        {language === 'en' ? 'Site creation and marketing (SEO, listing, affiliate, Facebook) track record'
+          : 'サイト制作・マーケティング（SEO・リスティング・アフィリエイト・Facebook）実績'}
       </h3>
 
       {webExperience && (
