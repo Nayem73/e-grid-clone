@@ -12,6 +12,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import Login from './pages/Login';
 import ServiceWebResult from './pages/ServiceWebResult';
 import NewsSection from './components/NewsSection';
+import PressSection from './components/PressSection';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path="/service/web_result" element={<ServiceWebResult />} />
               <Route path="/admin/login" element={<Login />} />
               <Route path="/news" element={<NewsSection showReadMore={false} />} />
+              <Route path="/pressrelease" element={<PressSection showReadMore={false} />} />
             </Routes>
           </main>
           <Footer />
