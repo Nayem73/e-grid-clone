@@ -203,6 +203,13 @@
   resize: vertical;
 }
 
+.textarea:focus {
+  /* border-color: #C09D51; */
+  border: 2px solid #C09D51;
+  /* box-shadow: 0 0 0 2px rgba(192, 157, 81, 0.3); */
+  outline: none;
+}
+
 .saveButton,
 .cancelButton {
   padding: 8px 16px;
