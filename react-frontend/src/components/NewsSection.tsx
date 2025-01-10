@@ -4,6 +4,7 @@ import styles from './NewsSection.module.css';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import EditableField from '../components/EditableField';
+import AddNewsForm from './AddNewsForm';
 import { X } from 'lucide-react';
 
 interface NewsTranslation {
@@ -36,6 +37,7 @@ const NewsSection: React.FC = () => {
   const [editingNews, setEditingNews] = useState<NewsEdit | null>(null);
   const { language } = useLanguage();
   const { user } = useAuth();
+  const [isAddingNews, setIsAddingNews] = useState(false);
 
   useEffect(() => {
     fetchNews();
@@ -116,6 +118,14 @@ const NewsSection: React.FC = () => {
         <h3 className={styles.subheading}>
           {language === 'en' ? "what's new" : language === 'jp' ? '新着情報' : "what's new"}
         </h3>
+        {user && (
+          <button
+            onClick={() => setIsAddingNews(true)}
+            className={styles.addNewsButton}
+          >
+            Add News
+          </button>
+        )}
         <div className={styles.content}>
           {news.map((newsItem) => {
             const translation = newsItem.news_translations.find(t => t.locale === language);
@@ -169,6 +179,12 @@ const NewsSection: React.FC = () => {
             );
           })}
         </div>
+
+        <AddNewsForm
+          isOpen={isAddingNews}
+          onClose={() => setIsAddingNews(false)}
+          onSuccess={fetchNews}
+        />
         <div className={styles.readMoreWrapper}>
           <a href="https://www.e-grid.co.jp/news/" className={styles.readMore}>
             READ MORE
