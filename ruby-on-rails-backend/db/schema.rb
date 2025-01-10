@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_09_123945) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_09_161241) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -70,6 +70,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_09_123945) do
     t.datetime "updated_at", null: false
     t.index ["news_id", "locale"], name: "index_news_translations_on_news_id_and_locale", unique: true
     t.index ["news_id"], name: "index_news_translations_on_news_id"
+  end
+
+  create_table "press_translations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "press_id", null: false
+    t.string "locale", null: false
+    t.string "title"
+    t.text "description"
+    t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["press_id", "locale"], name: "index_press_translations_on_press_id_and_locale", unique: true
+    t.index ["press_id"], name: "index_press_translations_on_press_id"
+  end
+
+  create_table "presses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_presses_on_slug", unique: true
   end
 
   create_table "product_translations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -185,6 +204,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_09_123945) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "news_translations", "news"
+  add_foreign_key "press_translations", "presses"
   add_foreign_key "product_translations", "products"
   add_foreign_key "service_softwaredev_result_details", "service_softwaredev_results"
   add_foreign_key "service_translations", "services"

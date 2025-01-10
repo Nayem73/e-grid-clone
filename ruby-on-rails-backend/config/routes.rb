@@ -20,5 +20,6 @@ Rails.application.routes.draw do
     resources :webresult_category_titles
     resources :products  
     resources :news  
+    resources :presses
   end
 end
