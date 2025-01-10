@@ -77,16 +77,16 @@ const AddNewsForm: React.FC<AddNewsFormProps> = ({ isOpen, onClose, onSuccess })
           <h2>Add News</h2>
           <div className={styles.languageToggle}>
             <button
-              className={`${styles.langButton} ${activeLocale === 'en' ? styles.active : ''}`}
-              onClick={() => setActiveLocale('en')}
-            >
-              English
-            </button>
-            <button
               className={`${styles.langButton} ${activeLocale === 'jp' ? styles.active : ''}`}
               onClick={() => setActiveLocale('jp')}
             >
-              日本語
+              JP
+            </button>
+            <button
+              className={`${styles.langButton} ${activeLocale === 'en' ? styles.active : ''}`}
+              onClick={() => setActiveLocale('en')}
+            >
+              EN
             </button>
           </div>
           <button onClick={onClose} className={styles.closeButton}>
