@@ -28,7 +28,7 @@ function App() {
               <Route path="/service/softwaredev_result" element={<ServiceSoftwareDevResult />} />
               <Route path="/service/web_result" element={<ServiceWebResult />} />
               <Route path="/admin/login" element={<Login />} />
-              <Route path="/news" element={<NewsSection />} />
+              <Route path="/news" element={<NewsSection showReadMore={false} />} />
             </Routes>
           </main>
           <Footer />
