@@ -31,7 +31,15 @@ interface NewsEdit {
   activeLocale: string;
 }
 
-const NewsSection: React.FC = () => {
+interface NewsSectionProps {
+  limit?: number;
+  showReadMore?: boolean;
+}
+
+const NewsSection: React.FC<NewsSectionProps> = ({
+  limit,
+  showReadMore = true
+}) => {
   const [news, setNews] = useState<News[]>([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editingNews, setEditingNews] = useState<NewsEdit | null>(null);
@@ -49,7 +57,8 @@ const NewsSection: React.FC = () => {
       const sortedNews = response.data.sort((a: News, b: News) =>
         new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
       );
-      setNews(sortedNews);
+      const limitedNews = limit ? sortedNews.slice(0, limit) : sortedNews;
+      setNews(limitedNews);
     } catch (error) {
       console.error('Error fetching news:', error);
     }
@@ -188,11 +197,13 @@ const NewsSection: React.FC = () => {
           onClose={() => setIsAddingNews(false)}
           onSuccess={fetchNews}
         />
-        <div className={styles.readMoreWrapper}>
-          <a href="https://www.e-grid.co.jp/news/" className={styles.readMore}>
-            READ MORE
-          </a>
-        </div>
+        {showReadMore && (
+          <div className={styles.readMoreWrapper}>
+            <a href="/news" className={styles.readMore}>
+              READ MORE
+            </a>
+          </div>
+        )}
       </div>
 
       {isEditing && editingNews && (

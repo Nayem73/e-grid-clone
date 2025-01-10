@@ -10,7 +10,7 @@ const Home = () => (
     <Carousel />
     <ServiceSection />
     <ProductSection />
-    <NewsSection />
+    <NewsSection limit={3} />
     <RecruitSection />
   </div>
 );
