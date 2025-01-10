@@ -157,7 +157,7 @@ const NewsSection: React.FC = () => {
                       rel="noopener noreferrer"
                       className={styles.category}
                     >
-                      notice
+                      {language === 'en' ? 'notice' : 'お知らせ'}
                     </a>
                   </div>
                   <EditableField
