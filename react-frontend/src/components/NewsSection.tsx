@@ -46,7 +46,10 @@ const NewsSection: React.FC = () => {
   const fetchNews = async () => {
     try {
       const response = await axios.get('/news');
-      setNews(response.data);
+      const sortedNews = response.data.sort((a: News, b: News) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
+      setNews(sortedNews);
     } catch (error) {
       console.error('Error fetching news:', error);
     }
