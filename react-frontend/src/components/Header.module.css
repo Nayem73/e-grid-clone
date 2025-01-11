@@ -83,18 +83,27 @@
 }
 
 .nav a:hover {
-  color: #C5A572;
+  color: #C09D51;
 }
 
-.contactButton {
-  background-color: #C5A572;
+.nav .contactButton {
+  background-color: #C09D51;
   padding: 0.2rem 1.2rem;
   border-radius: 30px;
   color: white !important;
+  /* Ensures white text overrides .nav a */
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 800;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border: 2px solid transparent;
 }
 
-.contactButton:hover {
-  background-color: #b39461;
+.nav .contactButton:hover {
+  background-color: white;
+  color: #C09D51 !important;
+  /* Ensures hover color is applied */
+  border: 2px solid #C09D51;
 }
 
 .rightSection {
