@@ -87,7 +87,7 @@ const Header = () => {
 
             <div className={styles.rightSection}>
               <button onClick={toggleLanguage} className={styles.languageButton}>
-                {language.toUpperCase()}
+                {language === 'en' ? 'JP' : 'EN'}
               </button>
               {user && (
                 <button onClick={handleLogout} className={styles.logoutButton}>
