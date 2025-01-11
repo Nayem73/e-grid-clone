@@ -1,13 +1,14 @@
 .header {
   background-color: white;
-  padding: 0;
+  padding: 1rem 0;
 }
 
 .headerInner {
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
-  padding: 0.5rem 0;
+  padding: 1rem 0;
+  padding-bottom: 1.5rem;
 }
 
 .description {
@@ -144,7 +145,7 @@
 
 .languageButton {
   background-color: #C09D51;
-  padding: 0.4rem 2.5rem;
+  padding: 0.35rem 2.55rem;
   border-radius: 30px;
   color: white !important;
   text-decoration: none;
