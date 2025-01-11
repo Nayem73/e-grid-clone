@@ -1,33 +1,38 @@
 .header {
   background-color: white;
-  padding: 0.5rem 2rem 1rem;
+  padding: 0;
 }
 
 .headerInner {
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
+  padding: 0.5rem 0;
 }
 
 .description {
-  font-size: 12px;
-  color: #666;
+  font-size: 10px;
+  color: #999;
   line-height: 1.4;
   margin-bottom: 0.5rem;
-  /* Align with the logo */
+  margin-left: -6rem;
   padding-left: 0;
+  letter-spacing: 0.1em;
 }
 
 .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0 -4rem;
+  padding: 0 2rem;
 }
 
 .logoSection {
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-left: -4rem;
 }
 
 .logoLink {
@@ -64,7 +69,8 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin: 0 2rem;
+  margin-left: auto;
+  margin-right: 1rem;
 }
 
 .nav a {
@@ -95,6 +101,8 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-right: -4rem;
+  min-width: fit-content;
 }
 
 .logoutButton {
@@ -133,9 +141,18 @@
     font-size: 11px;
     width: 60%;
     text-align: left;
+    margin-left: -3rem;
   }
 
   .nav {
     gap: 1rem;
+    margin-right: 1rem;
+  }
+
+  .container,
+  .logoSection,
+  .rightSection {
+    margin-left: -2rem;
+    margin-right: -2rem;
   }
 }

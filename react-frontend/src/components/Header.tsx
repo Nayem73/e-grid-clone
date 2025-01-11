@@ -23,7 +23,8 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.headerInner}>
         <div className={styles.description}>
-          Egrid Inc. Ruby on Rails software development, lab-based development (remote development), agile development, digital marketing
+          {language === 'en' ? 'Egrid Inc. Ruby on Rails software development, lab-based development (remote development), agile development, digital marketing'
+            : '株式会社イーグリッド　Ruby on Railsソフトウェア開発・ラボ型開発（リモート開発）・アジャイル開発・デジタルマーケティング'}
         </div>
 
         <div className={styles.container}>
