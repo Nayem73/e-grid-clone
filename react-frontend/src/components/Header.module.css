@@ -97,6 +97,7 @@
   font-weight: 800;
   transition: background-color 0.2s ease, color 0.2s ease;
   border: 2px solid transparent;
+  cursor: pointer;
 }
 
 .nav .contactButton:hover {
@@ -116,33 +117,56 @@
 
 .logoutButton {
   background-color: #ff5e57;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
-  font-size: 14px;
+  padding: 0.4rem 0.8rem;
+  border-radius: 30px;
+  color: white !important;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 800;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border: 2px solid transparent;
+  min-width: 70px;
+  text-align: center;
+  display: inline-block;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  /* Reset button defaults */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
 }
 
 .logoutButton:hover {
-  background-color: #ff4543;
+  background-color: white;
+  color: #ff4543 !important;
+  border: 2px solid #ff4543;
 }
 
 .languageButton {
-  background-color: #000;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  font-size: 14px;
-  cursor: pointer;
-  min-width: 45px;
+  background-color: #C09D51;
+  padding: 0.4rem 2.5rem;
+  border-radius: 30px;
+  color: white !important;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 800;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border: 2px solid transparent;
+  min-width: 70px;
   text-align: center;
-  transition: background-color 0.2s ease;
+  display: inline-block;
+  cursor: pointer;
+  /* Reset button defaults */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
 }
 
 .languageButton:hover {
-  background-color: #333;
+  background-color: white;
+  color: #C09D51 !important;
+  border: 2px solid #C09D51;
 }
 
 @media (max-width: 1024px) {
