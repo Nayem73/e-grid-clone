@@ -58,6 +58,9 @@ const WebresultSection: React.FC = () => {
 
     const { source, destination } = result;
 
+    // Don't do anything if dropped in same position
+    if (source.index === destination.index) return;
+
     // Create a new array of categories
     const updatedCategories = Array.from(categories);
 
@@ -66,24 +69,28 @@ const WebresultSection: React.FC = () => {
     // Insert it at the destination
     updatedCategories.splice(destination.index, 0, removed);
 
-    // Update positions (1-based)
-    const positions = updatedCategories.map((category, index) => ({
-      id: category.id,
+    // Immediately update the UI with new positions
+    const optimisticCategories = updatedCategories.map((category, index) => ({
+      ...category,
       position: index + 1
+    }));
+
+    // Update state immediately for smooth UI
+    setCategories(optimisticCategories);
+
+    // Prepare positions for API
+    const positions = optimisticCategories.map((category) => ({
+      id: category.id,
+      position: category.position
     }));
 
     try {
       await axios.post('/webresult_categories/update_positions', {
         positions: positions
       });
-
-      // Update local state with new positions
-      setCategories(updatedCategories.map((category, index) => ({
-        ...category,
-        position: index + 1
-      })));
     } catch (error) {
       console.error('Error updating positions:', error);
+      // Revert to original state on error
       fetchCategories();
     }
   };
