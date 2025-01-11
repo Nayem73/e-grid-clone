@@ -61,14 +61,14 @@ const Header = () => {
           </nav>
 
           <div className={styles.rightSection}>
+            <button onClick={toggleLanguage} className={styles.languageButton}>
+              {language.toUpperCase()}
+            </button>
             {user && (
               <button onClick={handleLogout} className={styles.logoutButton}>
                 Admin Logout
               </button>
             )}
-            <button onClick={toggleLanguage} className={styles.languageButton}>
-              {language.toUpperCase()}
-            </button>
           </div>
         </div>
       </div>
