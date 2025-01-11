@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 interface LanguageContextProps {
   language: string;
@@ -8,7 +8,18 @@ interface LanguageContextProps {
 const LanguageContext = createContext<LanguageContextProps | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState('jp'); // Default language is Japanese
+  const getInitialLanguage = () => {
+    // Check if a language is already saved in localStorage
+    const savedLanguage = localStorage.getItem('appLanguage');
+    return savedLanguage || 'jp'; // Default to Japanese if no saved language
+  };
+
+  const [language, setLanguage] = useState<string>(getInitialLanguage);
+
+  useEffect(() => {
+    // Save the selected language to localStorage whenever it changes
+    localStorage.setItem('appLanguage', language);
+  }, [language]);
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>
